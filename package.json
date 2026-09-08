@@ -1,0 +1,11 @@
+{
+  "name": "my-naik-foods-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix my-naik-foods-app run dev",
+    "server": "node my-naik-foods-app/server/index.js",
+    "build": "npm --prefix my-naik-foods-app run build",
+    "lint": "npm --prefix my-naik-foods-app run lint",
+    "start": "npm --prefix my-naik-foods-app run start"
+  }
+}
