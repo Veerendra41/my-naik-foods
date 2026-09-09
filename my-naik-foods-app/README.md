@@ -1,5 +1,9 @@
 # React + Vite
 
+## Backend storage
+
+Orders are stored in `data/orders.json`, so the backend does not require a database or database environment variables. Start it with `npm run server`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:
