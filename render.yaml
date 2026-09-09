@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: naik-foods-api
+    runtime: node
+    rootDir: my-naik-foods-app
+    buildCommand: npm install
+    startCommand: npm run server
+    envVars:
+      - key: FRONTEND_URL
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
