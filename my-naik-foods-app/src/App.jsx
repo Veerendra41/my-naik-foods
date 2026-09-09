@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 
+const apiBaseUrl = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 const imageRoot = 'https://www.naikfoods.co.in';
 const fallbackImage = `${imageRoot}/banners/home/banner-03.png`;
 const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
@@ -61,7 +63,7 @@ export default function App() {
 
     let order;
     try {
-      const orderResponse = await fetch('/api/orders', {
+      const orderResponse = await fetch(`${apiBaseUrl}/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -103,7 +105,7 @@ export default function App() {
       notes: { delivery_address: customer.address },
       order_id: order.razorpayOrderId || undefined,
       handler: async (response) => {
-        await fetch(`/api/orders/${order.id}/payment`, {
+        await fetch(`${apiBaseUrl}/api/orders/${order.id}/payment`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(response),

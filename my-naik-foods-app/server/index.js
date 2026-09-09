@@ -24,7 +24,12 @@ function saveOrders(orders) {
 }
 
 function sendJson(response, status, payload) {
-  response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
+  response.writeHead(status, {
+    'Access-Control-Allow-Origin': process.env.FRONTEND_URL || '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Content-Type': 'application/json; charset=utf-8',
+  });
   response.end(JSON.stringify(payload));
 }
 
@@ -53,6 +58,16 @@ async function createRazorpayOrder(total, receipt) {
 }
 
 async function handleApi(request, response, pathname) {
+  if (request.method === 'OPTIONS') {
+    response.writeHead(204, {
+      'Access-Control-Allow-Origin': process.env.FRONTEND_URL || '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    });
+    response.end();
+    return true;
+  }
+
   if (request.method === 'GET' && pathname === '/api/health') {
     sendJson(response, 200, { ok: true, paymentGateway: Boolean(razorpayKeyId && razorpaySecret) });
     return true;
